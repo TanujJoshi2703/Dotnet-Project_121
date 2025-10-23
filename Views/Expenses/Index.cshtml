@@ -1,0 +1,44 @@
+@model List<ExpenseTracker.Models.Expense>
+@{
+    ViewData["Title"] = "Expenses";
+}
+
+<h1>Expenses</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Add Expense</a>
+</p>
+
+<div class="mb-3">
+    <strong>Total:</strong> @ViewBag.Total
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Amount.ToString("0.00")</td>
+            <td>@item.Category</td>
+            <td>@item.Date.ToString("yyyy-MM-dd")</td>
+            <td>@item.Notes</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
